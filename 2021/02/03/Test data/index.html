@@ -14,7 +14,7 @@
 <meta property="og:description" content="使用北京地区企业与银行的交易数据">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-03T09:17:29.882Z">
-<meta property="article:modified_time" content="2021-02-03T17:05:06.839Z">
+<meta property="article:modified_time" content="2021-02-03T17:10:03.091Z">
 <meta property="article:author" content="Steven">
 <meta name="twitter:card" content="summary">
   
@@ -140,12 +140,8 @@ require(["d3"], function(d3) {
   }
 
   // We load the JSON file.
-  d3.json("https://raw.githubusercontent.com/Vectorchip/first_repo/master/graph.json", function(error, graph) {
-    // In this block, the file has been loaded
-    // and the 'graph' object contains our graph.
+  d3.json("https://raw.githubusercontent.com/HTCsteven/jsonfile/main/finance.json", function(error, graph) {
 
-    // We load the nodes and links in the
-    // force-directed graph.
     force.nodes(graph.nodes)
       .links(graph.links)
       .start();
