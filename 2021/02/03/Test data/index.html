@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="preconnect" href="//www.googletagmanager.com">
+	<link rel="preconnect" href="//zz.bdstatic.com">
+	<link rel="preconnect" href="//sp0.baidu.com">
+	<link rel="preconnect" href="//www.google-analytics.com">
+	<link rel="preconnect" href="//cdn1.lncld.net">
+	<link rel="preconnect" href="//unpkg.com">
+	<link rel="preconnect" href="//app-router.leancloud.cn">
+	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
+	<link rel="preconnect" href="//gravatar.loli.net">
+
+	<title>Hexo | Hexo</title>
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+	<meta name="generator" content="hexo">
+	<meta name="author" content="John Doe">
+	<meta name="description" content="">
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	<meta property="og:site_name" content="Hexo">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Hexo | Hexo">
+	<meta property="og:description" content="">
+	<meta property="og:url" content="http://example.com/2021/02/03/Test%20data/">
+
+	
+	<meta property="article:published_time" content="2021-02-03T17:02:12+08:00"/> 
+	<meta property="article:author" content="John Doe">
+	<meta property="article:published_first" content="Hexo, /2021/02/03/Test%20data/" />
+	
+
+	
+	
+	
+<link rel="stylesheet" href="/css/allinonecss.min.css">
+
+
+	
+	
+	
+</head>
+
+<body class="post-template">
+	<div class="site-wrapper">
+		
+
+
+
+
+<header class="site-header post-site-header outer">
+    <div class="inner">
+        
+<nav class="site-nav"> 
+    <div class="site-nav-left">
+        <ul class="nav">
+            <li>
+                
+                <a href="/" title="Home">HOME</a>
+                
+            </li>
+            
+        </ul> 
+    </div>
+     
+    <div class="site-nav-right">
+         
+        
+<div class="social-links" >
+    
+    
+    
+    
+    
+    
+    
+</div>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<div id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+            <div class="post-full-meta">
+                <time  class="post-full-meta-date" datetime="2021-02-03T09:00:36.129Z">
+                    2021-02-3
+                </time>
+                
+                <span class="date-divider">/</span>
+                
+                
+            </div>
+            <h1 class="post-full-title"></h1>
+        </header>
+        <div class="post-full no-image">
+            
+            <div class="post-full-content">
+                <article id="photoswipe" class="markdown-body">
+                    <h1 id="可视化测试"><a href="#可视化测试" class="headerlink" title="可视化测试"></a>可视化测试</h1>
+
+<div id="d3-example"></div>
+<style>
+.node {stroke: #fff; stroke-width: 1.5px;}
+.link {stroke: #999; stroke-opacity: .9;}
+</style>
+
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="d3" src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+require.config({paths:
+    {d3: "https://d3js.org/d3.v3.min"}});
+require(["d3"], function(d3) {
+  // The code in this block is executed when the
+  // d3.js library has been loaded.
+
+  // First, we specify the size of the canvas
+  // containing the visualization (size of the
+  // <div> element).
+  var width = 900, height = 600;
+
+  // We create a color scale.
+  var color = d3.scale.category10();
+
+  // We create a force-directed dynamic graph layout.
+  var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(30)
+    .size([width, height]);
+
+  // In the <div> element, we create a <svg> graphic
+  // that will contain our interactive visualization.
+  var svg = d3.select("#d3-example").select("svg")
+  if (svg.empty()) {
+    svg = d3.select("#d3-example").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+  }
+
+  // We load the JSON file.
+  d3.json("https://raw.githubusercontent.com/Vectorchip/first_repo/master/graph.json", function(error, graph) {
+    // In this block, the file has been loaded
+    // and the 'graph' object contains our graph.
+
+    // We load the nodes and links in the
+    // force-directed graph.
+    force.nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+    
+    // We create a <line> SVG element for each link
+    // in the graph.
+    var link = svg.selectAll(".link")
+      .data(graph.links)
+      .enter().append("line")
+      .attr("class", "link");
+    
+    // We create a <circle> SVG element for each node
+    // in the graph, and we specify a few attributes.
+    var node = svg.selectAll(".node")
+      .data(graph.nodes)
+      .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 5)  // radius
+      .style("fill", function(d) {
+         // The node color depends on the club.
+         return color(d.size);
+      })
+      .call(force.drag);
+    
+    // The name of each node is the node number.
+    node.append("title")
+        .text(function(d) { return d.name; });
+    
+    // We bind the positions of the SVG elements
+    // to the positions of the dynamic force-directed
+    // graph, at each time step.
+    force.on("tick", function() {
+      link.attr("x1", function(d){return d.source.x})
+          .attr("y1", function(d){return d.source.y})
+          .attr("x2", function(d){return d.target.x})
+          .attr("y2", function(d){return d.target.y});
+    
+      node.attr("cx", function(d){return d.x})
+          .attr("cy", function(d){return d.y});
+    });
+  });
+});
+</script>
+
+                </article>
+                <ul class="tags-postTags">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+    <nav id="gobottom" class="pagination">
+        
+        <span class="prev-next-post">·</span>
+        
+    </nav>
+
+    
+</div>
+
+
+
+
+
+
+	</div>
+	
+
+
+	
+
+
+
+
+<footer class="site-footer outer">
+	<div class="site-footer-content inner">
+		<div class="copyright">
+			<a href="/" title="Hexo">Hexo &copy; 2021</a>
+			
+				
+    		
+		</div>
+		<nav class="site-footer-nav">
+			
+			<a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
+		</nav>
+	</div>
+</footer>
+	
+
+
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+</script>
+
+
+<script id="scriptLoad" src="/js/allinone.min.js" async></script>
+
+
+<script>
+    document.getElementById('scriptLoad').addEventListener('load', function () {
+        
+        
+
+        
+        
+
+        
+        
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
