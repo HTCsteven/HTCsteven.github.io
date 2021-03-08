@@ -4,21 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>可视化展示 | Financial Big Data</title>
+  <title>Financial Big Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="使用北京地区企业与银行的交易数据">
+  <meta name="description" content="本网站为北京地区企业与银行交易数据的可视化成果展示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="可视化展示">
+<meta property="og:title" content="Financial Big Data">
 <meta property="og:url" content="http://example.com/2021/03/08/test%20data/index.html">
 <meta property="og:site_name" content="Financial Big Data">
-<meta property="og:description" content="使用北京地区企业与银行的交易数据">
+<meta property="og:description" content="本网站为北京地区企业与银行交易数据的可视化成果展示">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/HTCsteven/jsonfile/main/legeng.png">
 <meta property="article:published_time" content="2021-03-08T14:04:24.774Z">
-<meta property="article:modified_time" content="2021-03-08T14:08:26.606Z">
+<meta property="article:modified_time" content="2021-03-08T14:29:09.010Z">
 <meta property="article:author" content="Steven">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/HTCsteven/jsonfile/main/legeng.png">
   
     <link rel="alternate" href="/atom.xml" title="Financial Big Data" type="application/atom+xml">
   
@@ -60,6 +58,8 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
+          <a class="main-nav-link" href="/tags">研究</a>
+        
       </nav>
       <nav id="sub-nav">
         
@@ -85,118 +85,13 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      可视化展示
-    </h1>
-  
-
-      </header>
-    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="使用北京地区企业与银行的交易数据"><a href="#使用北京地区企业与银行的交易数据" class="headerlink" title="使用北京地区企业与银行的交易数据"></a>使用北京地区企业与银行的交易数据</h2><a id="more"></a>
-
-
-
-<div id="d3-example"></div>
-<style>
-.node {stroke: #fff; stroke-width: 1.5px;}
-.link {stroke: #999; stroke-opacity: .9;}
-</style>
-
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="d3" src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<script type="text/javascript">
-require.config({paths:
-    {d3: "https://d3js.org/d3.v3.min"}});
-require(["d3"], function(d3) {
-  // The code in this block is executed when the
-  // d3.js library has been loaded.
-
-  // First, we specify the size of the canvas
-  // containing the visualization (size of the
-  // <div> element).
-  var width = 900, height = 600;
-
-  // We create a color scale.
-  var color = d3.scale.category10();
-
-  // We create a force-directed dynamic graph layout.
-  var force = d3.layout.force()
-    .charge(-120)
-    .linkDistance(30)
-    .size([width, height]);
-
-  // In the <div> element, we create a <svg> graphic
-  // that will contain our interactive visualization.
-  var svg = d3.select("#d3-example").select("svg")
-  if (svg.empty()) {
-    svg = d3.select("#d3-example").append("svg")
-          .attr("width", width)
-          .attr("height", height);
-  }
-
-  // We load the JSON file.
-  d3.json("https://raw.githubusercontent.com/HTCsteven/jsonfile/main/trans.json", function(error, graph) {
-
-    force.nodes(graph.nodes)
-      .links(graph.links)
-      .start();
-    
-    // We create a <line> SVG element for each link
-    // in the graph.
-    var link = svg.selectAll(".link")
-      .data(graph.links)
-      .enter().append("line")
-      .attr("class", "link");
-    
-    // We create a <circle> SVG element for each node
-    // in the graph, and we specify a few attributes.
-    var node = svg.selectAll(".node")
-      .data(graph.nodes)
-      .enter().append("circle")
-      .attr("class", "node")
-      .attr("r", 5)  // radius
-      .style("fill", function(d) {
-         // The node color depends on the club.
-         return color(d.size);
-      })
-      .call(force.drag);
-    
-    // The name of each node is the node number.
-    node.append("title")
-        .text(function(d) { return d.name; });
-    
-    // We bind the positions of the SVG elements
-    // to the positions of the dynamic force-directed
-    // graph, at each time step.
-    force.on("tick", function() {
-      link.attr("x1", function(d){return d.source.x})
-          .attr("y1", function(d){return d.source.y})
-          .attr("x2", function(d){return d.target.x})
-          .attr("y2", function(d){return d.target.y});
-    
-      node.attr("cx", function(d){return d.x})
-          .attr("cy", function(d){return d.y});
-    });
-  });
-});
-</script>
-
-
-<p>鼠标悬停于节点可显示节点名称，拖动中心节点可拖动整幅图，其中几个中心节点为：</p>
-<p><img src="https://raw.githubusercontent.com/HTCsteven/jsonfile/main/legeng.png" alt="中心节点图例"></p>
-<p>节点的颜色根据节点的交易数量确定，交易数量相同的节点颜色相同。</p>
-
+        <h1 id="本网站为北京地区企业与银行交易数据的可视化成果展示"><a href="#本网站为北京地区企业与银行交易数据的可视化成果展示" class="headerlink" title="本网站为北京地区企业与银行交易数据的可视化成果展示"></a>本网站为北京地区企业与银行交易数据的可视化成果展示</h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/test%20data/" data-id="ckm0nsdhx00007kv16az155ur" data-title="可视化展示" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/03/08/test%20data/" data-id="ckm0ojcw60000wwv11gr9ho0o" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -237,7 +132,7 @@ require(["d3"], function(d3) {
       <ul>
         
           <li>
-            <a href="/2021/03/08/test%20data/">可视化展示</a>
+            <a href="/2021/03/08/test%20data/">(no title)</a>
           </li>
         
       </ul>
@@ -265,6 +160,8 @@ require(["d3"], function(d3) {
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">研究</a>
   
 </nav>
     
